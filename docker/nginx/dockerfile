@@ -13,7 +13,7 @@ COPY ./dhparam.pem /etc/nginx/dhparam.pem
 COPY ./self-signed.conf /etc/nginx/snippets/self-signed.conf
 COPY ./ssl-params.conf /etc/nginx/snippets/ssl-params.conf
 
-# 2.2
+# 2.2 Mitschnitt via tcpdump
 RUN apt-get install -y tcpdump
 
 COPY ./entrypoint.sh /entrypoint.sh
