@@ -5,6 +5,7 @@ services:
     networks:
       - backend
   nginx:
+    container_name: nginx
     build: ./docker/nginx
     ports:
       - "80:80"
@@ -12,6 +13,16 @@ services:
       - "8080:443"
     networks:
       - backend
+    volumes:
+      - tcpdumpinfo:/tcpdumpinfo
+  tcp:
+    container_name: tcp
+    build: ./docker/tcp
+    volumes:
+      - tcpdumpinfo:/tcpdumpinfo
 
 networks:
   backend:
+
+volumes:
+  tcpdumpinfo:
