@@ -1,3 +1,6 @@
 [submodule "docker/web/its-pw"]
 	path = docker/web/its-pw
 	url = git@github.com:Lars5Janssen/its-pw.git
+[submodule "docker/web/--force"]
+	path = docker/web/--force
+	url = https://github.com/Lars5Janssen/its-pw.git
