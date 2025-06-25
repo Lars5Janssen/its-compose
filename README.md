@@ -5,6 +5,6 @@ pull me with
 git clone https://github.com/Lars5Janssen/its-compose.git --recurse-submodules
 ```
 ## for development
-``bash
+```bash
 git clone git@github.com:Lars5Janssen/its-compose.git --recurse-submodules
 ``` 
