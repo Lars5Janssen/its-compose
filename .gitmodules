@@ -1,0 +1,3 @@
+[submodule "docker/web/its-pw"]
+	path = docker/web/its-pw
+	url = git@github.com:Lars5Janssen/its-pw.git
