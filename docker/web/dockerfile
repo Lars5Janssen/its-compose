@@ -9,6 +9,8 @@ WORKDIR /usr/src/app/
 COPY ./its-pw/go.mod ./its-pw/go.sum ./
 RUN go mod download
 ADD ./its-pw/ .
-RUN go build -v -o /usr/local/bin/app ./...
+# RUN go build -v -o /usr/local/bin/app ./...
+RUN go build -v .
+RUN mv its-pw /usr/local/bin/app
 
 CMD ["app"]
