@@ -5,6 +5,11 @@ FROM golang:1.24
 # RUN cd /webservice-go && /usr/local/go/bin/go build -o /webservice-go/webservice /webservice-go/main.go
 # RUN rm -rf /webservice-go
 
+# BASIC
+RUN apt-get -y update
+RUN apt-get -y upgrade
+RUN apt-get install -y vim # FOR DEV
+
 WORKDIR /usr/src/app/
 COPY ./its-pw/go.mod ./its-pw/go.sum ./
 RUN go mod download
