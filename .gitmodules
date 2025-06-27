@@ -2,3 +2,7 @@
 	path = docker/web/its-pw
 	url = https://github.com/Lars5Janssen/its-pw.git
 	branch = passkeys
+[submodule "docker/db/its-pw"]
+	path = docker/db/its-pw
+	url = https://github.com/Lars5Janssen/its-pw.git
+	branch = passkeys

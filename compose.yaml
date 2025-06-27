@@ -2,8 +2,36 @@ services:
   webservice:
     container_name: web
     build: ./docker/web
+    ports:
+      - "8765:8080"
+    environment:
+      DATABASE_URL: "postgresql://its:its@db:5432/its"
+    depends_on:
+      db:
+        condition: service_healthy
     networks:
       - backend
+
+  db:
+    container_name: db
+    image: postgres:latest
+    restart: always
+    shm_size: 128mb
+    environment:
+      POSTGRES_DB: its
+      POSTGRES_PASSWORD: "its"
+      POSTGRES_USER: "its"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U its"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - ./docker/db/its-pw/schema.sql:/docker-entrypoint-initdb.d/schema.sql:ro
+      - db:/var/lib/postgresql/data
+    networks:
+      - backend
+
   nginx:
     container_name: nginx
     build: ./docker/nginx
@@ -13,6 +41,9 @@ services:
       - "8080:443"
     networks:
       - backend
+    depends_on:
+      webservice:
+        condition: service_started
     volumes:
       - tcpdumpinfo:/tcpdumpinfo
   tcp:
@@ -26,3 +57,4 @@ networks:
 
 volumes:
   tcpdumpinfo:
+  db:
