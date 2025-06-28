@@ -6,11 +6,24 @@ services:
       - "8765:8080"
     environment:
       DATABASE_URL: "postgresql://its:its@db:5432/its"
+      IS_IN_DOCKER: "true"
     depends_on:
       db:
         condition: service_healthy
     networks:
       - backend
+    volumes:
+      - lt:/locationTest/
+
+  location_test:
+    container_name: lt
+    build: ./docker/lt
+    volumes:
+      - lt:/locationTest/
+    depends_on:
+      webservice:
+        condition: service_started
+
 
   db:
     container_name: db
@@ -23,8 +36,8 @@ services:
       POSTGRES_USER: "its"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U its"]
-      interval: 10s
-      timeout: 5s
+      interval: 2s
+      timeout: 2s
       retries: 5
     volumes:
       - ./docker/db/its-pw/schema.sql:/docker-entrypoint-initdb.d/schema.sql:ro
@@ -58,3 +71,4 @@ networks:
 volumes:
   tcpdumpinfo:
   db:
+  lt:
